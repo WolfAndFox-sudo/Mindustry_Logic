@@ -1,0 +1,26 @@
+/*
+電気の容量と生産量を表示する
+*/
+sensor pow node1 @powerNetStored
+sensor maxPow node1 @powerNetCapacity
+sensor inPowMax node1 @powerNetIn
+sensor outPow node1 @powerNetOut
+set dispMax 80
+op div dispHalf dispMax 2
+draw clear 0 0 0 0 0 0
+op div culPow pow maxPow
+op mul culPow culPow dispMax
+draw color 255 0 0 255 0 0
+draw rect 0 0 dispHalf culPow 0 0
+draw color 255 255 255 255 0 0
+draw rect dispHalf dispHalf dispHalf 1 0 0
+op sub culPowUp inPowMax outPow
+draw color 255 0 0 255 0 0
+jump 19 lessThan culPowUp 0
+set culPowUp inPowMax
+draw color 0 255 0 255 0 0
+print culPowUp
+op div culPowUp culPowUp dispHalf
+draw rect dispHalf dispHalf dispHalf culPowUp 0 0
+printflush message1
+drawflush display1
