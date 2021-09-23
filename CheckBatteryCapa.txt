@@ -1,0 +1,18 @@
+/*
+バッテリーの容量を視覚的に表示
+また、数字でも確認できるようにした。
+*/
+sensor pow battery1 @powerNetStored
+sensor maxPow battery1 @powerNetCapacity
+set dispMax 80
+op div dispHalf dispMax 2
+draw clear 0 0 0 0 0 0
+op div culPow pow maxPow
+op mul culPow culPow dispMax
+print culPow
+print "/"
+print maxPow
+draw color 255 0 0 255 0 0
+draw rect 0 0 80 culPow 0 0
+printflush message1
+drawflush display1
