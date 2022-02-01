@@ -1,0 +1,38 @@
+/**
+  * レーダーシステム
+  * 
+  */
+set sht 0
+set maxUnit 17
+set raderUnit hail1
+radar attacker enemy any distance raderUnit 1 UNIT
+print "sw="
+sensor sw switch1 @enabled
+jump 31 notEqual sw 1
+print "ON"
+sensor X UNIT @x
+sensor Y UNIT @y
+jump 13 notEqual X null
+jump 13 notEqual Y null
+jump 15 always x false
+set sht 1
+jump 16 always x false
+set sht 0
+set i 0
+getlink unit i
+control shoot unit X Y sht 0
+op add i i 1
+jump 17 lessThan i maxUnit
+print "x="
+print X
+print ",y="
+print Y
+print ",shoot="
+print sht
+print ", i="
+print i
+printflush message1
+end
+print "OFF"
+printflush message1
+jump 3 always x false
