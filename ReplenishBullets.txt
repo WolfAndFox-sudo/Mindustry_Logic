@@ -1,0 +1,16 @@
+/*
+コアの中からタレットの弾を取り出して弾薬補充する。
+*/
+set UNIT duo1
+sensor amo UNIT @ammo
+sensor capa UNIT @ammoCapacity
+print amo
+print "/"
+print capa
+jump 10 equal amo capa
+control configure unloader1 @copper 0 0 0
+control enabled conveyor2 1 0 0 0
+jump 12 always x false
+control configure unloader1 0 0 0 0
+control enabled conveyor2 0 0 0 0
+printflush message1
